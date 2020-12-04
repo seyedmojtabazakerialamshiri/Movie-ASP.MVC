@@ -1,0 +1,17 @@
+﻿@model FilmApp.Models.Entity.Genre
+@{
+    ViewData["Title"] = "AddGenre";
+}
+
+<div>
+    <h5 class="Top-Title">Add Genre</h5>
+    <form asp-action="AddGenre" asp-controller="Movie">
+        <div class="form-group">
+            <input type="text" asp-for="GenreName" class="form-control" placeholder="Title">
+            <span asp-validation-for="GenreName" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-info custom-button">Save</button>
+    </form>
+
+</div>
+

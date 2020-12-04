@@ -1,0 +1,59 @@
+﻿@model FilmApp.Models.ViewModel.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("FilterFilm", "Movie", FormMethod.Post, new { @class = "" }))
+{
+    <div class="input-group col-md-6 col-lg-4 form-custom ">
+        <select type="text" class="form-control" placeholder="Genre" name="search" id="search" value="">
+            <option> Select a Genre </option>
+            @{
+                foreach (var genre in Model.GenreViewModels)
+                {
+                    <option value="@genre?.GenreId">@genre?.GenreName</option>
+                }
+            }
+        </select>
+        <div class="input-group-append">
+            <input type="submit" id="submitId" value="Apply" class="btn btn-info" />
+        </div>
+    </div>
+}
+
+<section class="gallery-block cards-gallery">
+    <div class="container">
+        <div class="row">
+            @{
+                foreach (var film in Model.FilmViewModels)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card border-0 transform-on-hover">
+                            <a class="" href="">
+                                <img src="~/img/@film?.Url" alt="Card Image" class="card-img-top">
+                            </a>
+                            <div class="card-body">
+                                <h6><a href="#">@film?.Title</a></h6>
+                                @{
+                                    var res = film?.FilmGenres?.Where(a => a.FilmId == film.FilmId).ToList();
+                                    string genre = string.Empty;
+                                    if (res != null)
+                                    {
+                                        foreach (var item in res)
+                                        {
+                                            genre += " " + item?.Genre?.GenreName;
+                                        }
+                                    }
+                                    <h6>@genre </h6>
+                                }
+
+                                <h8><a href="#">@film?.Description</a></h8>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>

@@ -1,0 +1,78 @@
+﻿@model FilmApp.Models.ViewModel.AddFilmViewModel
+@{
+    ViewData["Title"] = "AddFilm";
+}
+
+<div>
+    <h5 class="Top-Title">Edit Film</h5>
+    @using (Html.BeginForm("EditFilm", "Movie", FormMethod.Post, new { enctype = "multipart/form-data", id = "form" }))
+    {
+        @Html.HiddenFor(film => film.Film.FilmId)
+        <div class="form-group input-group" style="display: none">
+            <select multiple class="form-control" asp-for="OriginalSelectedGenre" asp-items="Model?.OriginalSelectedGenres"></select>
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="Film.Title" class="form-control" placeholder="Title">
+            <span asp-validation-for="Film.Title" class="text-danger"></span>
+        </div>
+        <div class="form-custom">
+            <select class='form-control fstdropdown-select' id="allgenres">
+                <option selected="selected">Select a Genre</option>
+
+                @if (Model?.Genres != null)
+                {
+                    foreach (var genre in Model?.Genres)
+                    {
+                        <option value="@genre?.GenreId">@genre?.GenreName</option>
+                    }
+                }
+
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="button" id="addtogenrelist" value="Add" class="btn btn-info" />
+            <input type="button" id="removegenrelist" value="Remove" class="btn btn-info" />
+            <input type="button" id="cleargenrelist" value="Clear" class="btn btn-info" />
+        </div>
+        <div class="form-group input-group">
+            <select multiple class="form-control" asp-for="SelectedGenre" asp-items="Model?.SelectedGenres"></select>
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="SelectedGenres" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="text" asp-for="Film.Length" class="form-control" placeholder="Length">
+            <span asp-validation-for="Film.Length" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" asp-for="Film.Description" id="description1" rows="3" placeholder="Film Description"></textarea>
+            <span asp-validation-for="Film.Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group" id="group2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon2"><i class=""></i></span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" asp-for="PostedFile" class="form-control custom-file-input" id="PostedFile" name="PostedFile" />
+                    <label class="custom-file-label" for="PostedFile">Choose picture</label>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <span asp-validation-for="PostedFile" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-info custom-button">Save</button>
+    }
+
+
+
+
+</div>
+
+
+@section Scripts{
+    <script src="~/js/addfilm.js" asp-append-version="true"></script>
+}

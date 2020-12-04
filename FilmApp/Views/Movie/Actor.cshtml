@@ -1,0 +1,35 @@
+﻿@model FilmApp.Models.ViewModel.ActorViewModel
+@{
+    ViewData["Title"] = "Actor";
+}
+
+<button type="submit" class="btn btn-info custom-button" onclick="location.href='@Url.Action("AddActor", "Movie")'">Add Actor</button>
+
+<div class="">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var actor in Model.ActorViewModels)
+                {
+                    <tr>
+                        <td>@actor?.ActorFirstName</td>
+                        <td>@actor?.ActorLastName</td>
+                        <td>
+                            <a href="#">Edit</a>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+

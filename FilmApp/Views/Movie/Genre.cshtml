@@ -1,0 +1,36 @@
+﻿@model FilmApp.Models.ViewModel.GenreViewModel
+@{
+    ViewData["Title"] = "AddGenre";
+}
+
+<button type="submit" class="btn btn-info custom-button" onclick="location.href='@Url.Action("AddGenre", "Movie")'">Add Genre</button>
+
+<div class="">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Genre Name</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var genre in Model.GenreViewModels)
+                {
+                    <tr>
+                        <td>@genre?.GenreName</td>
+                        <td>
+                            <a href="#">Edit</a>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+

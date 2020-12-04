@@ -1,0 +1,52 @@
+﻿@model FilmApp.Models.ViewModel.FilmViewModel
+@{
+    ViewData["Title"] = "AddFilm";
+}
+
+<button type="submit" class="btn btn-info custom-button" onclick="location.href='@Url.Action("AddFilm", "Movie")'">Add Film</button>
+
+<div class="">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Genres</th>
+                <th scope="col">Length</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var film in Model.FilmViewModels)
+                {
+                    <tr>
+                        <td>@film?.Title</td>
+                        <td>
+
+                            @if (film?.FilmGenres != null)
+                            {
+                                foreach (var genre in film.FilmGenres)
+                                {
+                                    <span>@genre?.Genre?.GenreName</span>
+                                }
+                            }
+
+                        </td>
+                        <td>@film?.Length</td>
+                        <td>@film?.Description</td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditFilm", "Movie", new { film?.FilmId }, null)
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
