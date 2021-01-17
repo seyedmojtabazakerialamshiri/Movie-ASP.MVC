@@ -20,7 +20,7 @@ namespace FilmApp.Controllers
         private readonly IWebHostEnvironment _appEnvironment;
 
         /// <summary>
-        /// Controller Constructor
+        /// Controller Constructor.
         /// </summary>
         /// <param name="uow">Unit Of Work</param>
         /// <param name="appEnvironment">Hosting information</param>
